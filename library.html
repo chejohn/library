@@ -2,6 +2,8 @@
 <html>
     <head>
         <title>Library</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
         <link rel="stylesheet" href= "./library.css">
         <script async src="./library.js"></script>
     </head>
@@ -12,11 +14,40 @@
                 <div id = 'title'>Library</div>
             </div>
             <div id = 'sign-in-container'>
-                <button type = 'button' id = 'Sign In'></button>
+                <button type = 'button' id = 'sign-in'>Sign in</button>
             </div>
         </div>
         <div id = 'book-container'></div>
-        <div id = 'info-container'></div>
+        <div id = 'info-panel'>
+            <div id = 'information-container' class = 'panel-data'>
+                <div id = 'information-title'>Information</div>
+                <div id = library-data-container>
+                    <div class = 'library-data'>
+                        <div>Books</div> 
+                        <div>0</div>
+                    </div>
+                    <div class = 'library-data'>
+                        <div>Completed Books</div>
+                        <div>0</div>
+                    </div>
+                    <div class = 'library-data'>
+                        <div>Total Pages</div>
+                        <div>0</div>
+                    </div>
+                    <div class = 'library-data'>
+                        <div>Completed</div>
+                        <div>0</div>
+                    </div>
+                </div>
+            </div>
+            <div id = 'storage-options' class = 'panel-data'>
+                <div id = 'storage-option-title'>Storage Options</div>
+                <div id = 'local-button-container'>
+                    <button id = 'local-button'>Delete Local</button>
+                </div>
+            </div>
+            <div id = 'made-by'>Made by Ché</div>
+        </div>
     </body>
 
 </html>
