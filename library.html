@@ -9,6 +9,23 @@
         <script async src="./library.js"></script>
     </head>
     <body>
+        <div id = 'popUp-background'>
+            <div id = 'popUp-container'>
+                <div id = add-new-book>
+                    <div>Add New Book</div>
+                </div>
+                <div id = 'form-info'>
+                    <input type = 'text' class = 'input' placeholder= "Title"><br>
+                    <input type = 'text' class = 'input' placeholder= "Author"><br>
+                    <input type = 'text' id = 'total-pages' class = 'input' placeholder= "Total pages"><br>
+                    <input type = 'text' id = 'completed-pages' class = 'input' placeholder= "Completed pages"><br>
+                </div>
+                <div id = add-cancel-container>
+                    <div id = 'cancel'>Cancel</div>
+                    <div id = 'add'>Add</div>
+                </div>
+            </div>
+        </div>
         <div id = 'header'>
             <div id = 'libraryToolbar-container'>
                 <div id = 'menu'>
@@ -18,37 +35,25 @@
                 </div>
                 <div id = 'title'>Library</div>
             </div>
-            <div id = 'sign-in-container'>
-                <button type = 'button' id = 'sign-in'>Sign in</button>
-            </div>
         </div>
         <div id = 'book-container'>
-            <div class = 'add-button'>
-                <div class = 'plus-sign'>+</div>
-            </div>
-            <div class = 'add-button'>
-                <div class = 'plus-sign'>+</div>
-            </div>
-            <div class = 'add-button'>
-                <div class = 'plus-sign'>+</div>
-            </div>
-            <div class = 'add-button'>
-                <div class = 'plus-sign'>+</div>
-            </div>
-            <div class = 'add-button'>
-                <div class = 'plus-sign'>+</div>
-            </div>
-            <div class = 'add-button'>
-                <div class = 'plus-sign'>+</div>
-            </div>
-            <div class = 'add-button'>
-                <div class = 'plus-sign'>+</div>
-            </div>
-            <div class = 'add-button'>
-                <div class = 'plus-sign'>+</div>
-            </div>
-            <div class = 'add-button'>
-                <div class = 'plus-sign'>+</div>
+            <div class = 'book'>
+                <div id = 'edit-remove-container'>
+                    <div id = 'edit'>Edit</div>
+                    <div id = 'remove'>Remove</div>
+                </div>
+                <div id = 'display'>
+
+                </div>
+                <div id = 'add-minus-check-container'>
+                    <div id = 'minus'>-</div>
+                    <div id = 'check'>✓</div>
+                    <div id = 'add-page'>+</div>
+                </div>
+                <div id = 'total-pages-container'>
+                    <div id = 'finished-pages'>0</div>
+                    <div id = 'total-pages'>100</div>
+                </div>
             </div>
             <div class = 'add-button'>
                 <div class = 'plus-sign'>+</div>
@@ -66,18 +71,10 @@
                         <div>Completed Books</div>
                         <div>0</div>
                     </div>
-                    <div class = 'library-data'>
-                        <div>Total Pages</div>
-                        <div>0</div>
-                    </div>
-                    <div class = 'library-data'>
-                        <div>Completed</div>
-                        <div>0</div>
-                    </div>
                 </div>
             </div>
             <div id = 'storage-options' class = 'panel-data'>
-                <div id = 'storage-option-title'>Storage Options</div>
+                <div id = 'storage-option-title'>Storage Option</div>
                 <div id = 'local-button-container'>
                     <button id = 'local-button'>Delete Local</button>
                 </div>
