@@ -162,7 +162,7 @@ body {
     color: rgb(99, 155, 133);
 }
 
- #popUp-background {
+ #popUp-background-form, #popUp-background-edit {
     position: fixed;
     width: 100%;
     height: 100%;
@@ -173,7 +173,7 @@ body {
     align-items: center;
 } 
 
-#popUp-container {
+#popUp-container-form, #popUp-container-edit {
     height: 500px;
     width: 500px;
     display: grid;
@@ -181,19 +181,15 @@ body {
     grid-template-rows: 60px 1fr 60px;
     box-shadow: 0 0 20px rgb(71 3 88);
     animation: appear 0.3s ease-in;
+    border-radius: 20px;
 }
 
-#popUp-container, #add-new-book {
+#add-new-book, #edit-book {
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
 }
 
-#popUp-container, #add-cancel-container {
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-}
-
-#add-new-book {
+#add-new-book, #edit-book {
     display: grid;
     justify-content: center;
     align-items: center;
@@ -201,34 +197,36 @@ body {
     font-size: 20px;
 }
 
-#add-cancel-container {
+#add-cancel-container, #edit-cancel-container {
     display: grid;
     font-size: 20px;
     font-weight: bold;
     grid-template-columns: 1fr 1fr;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 
-#cancel, #add {
+#cancel-edit, #cancel-form, #add, #edit-form-button {
     display: grid;
     justify-content: center;
     align-items: center;
 }
 
-#cancel {
+#cancel-edit, #cancel-form {
     border-bottom-left-radius: 20px;
     background-color: rgba(175, 58, 58, 0.5);
 }
 
-#cancel:hover {
+#cancel-edit:hover, #cancel-form:hover {
     background-color: rgba(175, 58, 58, 0.8);
 }
 
-#add {
+#add, #edit-form-button{
     border-bottom-right-radius: 20px;
     background-color: rgba(59, 176, 63, 0.5);
 }
 
-#add:hover {
+#add:hover, #edit-form-button:hover {
     background-color: rgba(59, 176, 63, 0.8);
 }
 
@@ -243,7 +241,7 @@ body {
     padding-top: 45px;
 }
 
-.input {
+.input-form, .input-edit {
     border: none;
     border-bottom: 1px solid rgba(0,0, 0, 0.4);
     font-size: 20px;
@@ -253,22 +251,24 @@ body {
     
 }
 
-.input:focus::placeholder {
+.input-form:focus::placeholder,.input-edit:focus::placeholder {
     color: transparent;
 }
 
-#total-pages, #completed-pages {
+#total-pages-form, #total-pages-edit, #completed-pages-form, #completed-pages-edit {
     width: 50%;
 }
 
 .book {
     height: 400px;
     width: 300px;
-    box-shadow: 0 0 4px 10px rgba(60, 59, 60, 0.65);
+    box-shadow: 0 0 4px 10px rgba(60, 59, 60, 0.6);
     display: grid;
     grid-template-rows: 50px 1fr 60px 50px;
     border-radius: 10px;
     margin: 20px;
+    font-weight: bold;
+    animation: appear 0.5s ease-in;
 }
 
 #edit-remove-container, #total-pages-container {
@@ -357,6 +357,25 @@ body {
     border-right: 2px solid white;
 }
 
+#display {
+    word-break: break-word;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+#book-title {
+    font-size: 24px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#author-name {
+    text-align: right;
+    margin-right: 15px;
+    margin-bottom: 10px;
+}
 
 @media only screen and (max-width: 1023px) {
     body {
@@ -422,14 +441,15 @@ body {
     }
 
     .add-button:hover {
-        transform: scale(0.7);
+        transform: scale(0.8);
     }
 
-    #popUp-container {
+    #popUp-container-form, #popUp-container-edit {
         transform: scale(0.6);
     }
 
     .book {
         transform: scale(0.8);
+        margin: 0;
     }
 }

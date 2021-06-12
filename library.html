@@ -9,19 +9,36 @@
         <script async src="./library.js"></script>
     </head>
     <body>
-        <div id = 'popUp-background'>
-            <div id = 'popUp-container'>
+        <div id = 'popUp-background-edit'>
+            <div id = 'popUp-container-edit'>
+                <div id = 'edit-book'>
+                    <div>Edit Book</div>
+                </div>
+                <div id = 'form-info'>
+                    <input type = 'text' class = 'input-edit' placeholder= "Title"><br>
+                    <input type = 'text' class = 'input-edit' placeholder= "Author"><br>
+                    <input type = 'text' id = 'total-pages-edit' class = 'input-edit' placeholder= "Total pages"><br>
+                    <input type = 'text' id = 'completed-pages-edit' class = 'input-edit' placeholder= "Completed pages"><br>
+                </div>
+                <div id = 'edit-cancel-container'>
+                    <div id = 'cancel-edit'>Cancel</div>
+                    <div id = 'edit-form-button'>Edit</div>
+                </div>
+            </div>
+        </div>
+        <div id = 'popUp-background-form'>
+            <div id = 'popUp-container-form'>
                 <div id = add-new-book>
                     <div>Add New Book</div>
                 </div>
                 <div id = 'form-info'>
-                    <input type = 'text' class = 'input' placeholder= "Title"><br>
-                    <input type = 'text' class = 'input' placeholder= "Author"><br>
-                    <input type = 'text' id = 'total-pages' class = 'input' placeholder= "Total pages"><br>
-                    <input type = 'text' id = 'completed-pages' class = 'input' placeholder= "Completed pages"><br>
+                    <input type = 'text' class = 'input-form' placeholder= "Title"><br>
+                    <input type = 'text' class = 'input-form' placeholder= "Author"><br>
+                    <input type = 'text' id = 'total-pages-form' class = 'input-form' placeholder= "Total pages"><br>
+                    <input type = 'text' id = 'completed-pages-form' class = 'input-form' placeholder= "Completed pages"><br>
                 </div>
                 <div id = add-cancel-container>
-                    <div id = 'cancel'>Cancel</div>
+                    <div id = 'cancel-form'>Cancel</div>
                     <div id = 'add'>Add</div>
                 </div>
             </div>
@@ -43,7 +60,8 @@
                     <div id = 'remove'>Remove</div>
                 </div>
                 <div id = 'display'>
-
+                    <div id = 'book-title'>Alice in Wonderland</div>
+                    <div id = 'author-name'>Ché John</div>
                 </div>
                 <div id = 'add-minus-check-container'>
                     <div id = 'minus'>-</div>
@@ -65,7 +83,7 @@
                 <div id = library-data-container>
                     <div class = 'library-data'>
                         <div>Books</div> 
-                        <div>0</div>
+                        <div id = 'count'>0</div>
                     </div>
                     <div class = 'library-data'>
                         <div>Completed Books</div>
