@@ -1,104 +1,42 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
     <head>
-        <title>Library</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href= "./library.css">
-        <script async src="./library.js"></script>
+        <link rel="stylesheet" href="library.css">
+        <title>Library</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald&display=swap" rel="stylesheet">
+        <script defer src = "library.js"></script>
     </head>
     <body>
-        <div id = 'popUp-background-edit'>
-            <div id = 'popUp-container-edit'>
-                <div id = 'edit-book'>
-                    <div>Edit Book</div>
-                </div>
-                <div id = 'form-info'>
-                    <input type = 'text' class = 'input-edit' placeholder= "Title"><br>
-                    <input type = 'text' class = 'input-edit' placeholder= "Author"><br>
-                    <input type = 'text' id = 'total-pages-edit' class = 'input-edit' placeholder= "Total pages"><br>
-                    <input type = 'text' id = 'completed-pages-edit' class = 'input-edit' placeholder= "Completed pages"><br>
-                </div>
-                <div id = 'edit-cancel-container'>
-                    <div id = 'cancel-edit'>Cancel</div>
-                    <div id = 'edit-form-button'>Edit</div>
-                </div>
-            </div>
+        <div id = "popUp-background">
+            <form id = "popUp-form">
+                <div id = "popUp-header">Add new book</div>
+                <input type = "text" placeholder="Title" name = "title" autocomplete = "off" class = "text-field" required maxlength="20"><br>
+                <input type = "text" placeholder="Author" name = "author" autocomplete = "off" class = "text-field" required maxlength="20"><br>
+                <input type = "number" placeholder="Pages" min = "1" max ="9999" autocomplete = "off" name = "pages" class = "text-field" required><br>
+                <label for = "checkbox" id = "checkbox-label">Read?</label>
+                <input type = 'checkbox' id = "checkbox" value = "read"><br>
+                <button id = "form-bttn" type = "submit" class = "small-bttn">Submit</button>
+            </form>
         </div>
-        <div id = 'popUp-background-form'>
-            <div id = 'popUp-container-form'>
-                <div id = add-new-book>
-                    <div>Add New Book</div>
-                </div>
-                <div id = 'form-info'>
-                    <input type = 'text' class = 'input-form' placeholder= "Title"><br>
-                    <input type = 'text' class = 'input-form' placeholder= "Author"><br>
-                    <input type = 'text' id = 'total-pages-form' class = 'input-form' placeholder= "Total pages"><br>
-                    <input type = 'text' id = 'completed-pages-form' class = 'input-form' placeholder= "Completed pages"><br>
-                </div>
-                <div id = add-cancel-container>
-                    <div id = 'cancel-form'>Cancel</div>
-                    <div id = 'add'>Add</div>
-                </div>
-            </div>
+        <div id = "header-container">
+            <div id = "header-title">LIBRARY</div>
         </div>
-        <div id = 'header'>
-            <div id = 'libraryToolbar-container'>
-                <div id = 'menu'>
-                    <div class = 'bar'></div>
-                    <div class = 'bar'></div>
-                    <div class = 'bar'></div>
-                </div>
-                <div id = 'title'>Library</div>
-            </div>
-        </div>
-        <div id = 'book-container'>
-            <div class = 'book'>
-                <div id = 'edit-remove-container'>
-                    <div id = 'edit'>Edit</div>
-                    <div id = 'remove'>Remove</div>
-                </div>
-                <div id = 'display'>
-                    <div id = 'book-title'>Alice in Wonderland</div>
-                    <div id = 'author-name'>Ché John</div>
-                </div>
-                <div id = 'add-minus-check-container'>
-                    <div id = 'minus'>-</div>
-                    <div id = 'check'>✓</div>
-                    <div id = 'add-page'>+</div>
-                </div>
-                <div id = 'total-pages-container'>
-                    <div id = 'finished-pages'>0</div>
-                    <div id = 'total-pages'>100</div>
+        <div id = "container">
+            <button id = "new-book-bttn">New book</button>
+            <div id = "grid-container">
+                <div class = "card">
+                    <div id = "title">"Alice in Wonderland"</div>
+                    <div id = "author">Ché John</div>
+                    <div id = "number-of-pages">20 pages</div>
+                    <button class = "small-bttn" id = "read-bttn">Read</button>
+                    <button class = "small-bttn" id = "remove-bttn">Remove</button>
                 </div>
             </div>
-            <div class = 'add-button'>
-                <div class = 'plus-sign'>+</div>
-            </div>
-        </div>
-        <div class = 'info-panel'>
-            <div id = 'information-container' class = 'panel-data'>
-                <div id = 'information-title'>Information</div>
-                <div id = library-data-container>
-                    <div class = 'library-data'>
-                        <div>Books</div> 
-                        <div id = 'count'>0</div>
-                    </div>
-                    <div class = 'library-data'>
-                        <div>Completed Books</div>
-                        <div>0</div>
-                    </div>
-                </div>
-            </div>
-            <div id = 'storage-options' class = 'panel-data'>
-                <div id = 'storage-option-title'>Storage Option</div>
-                <div id = 'local-button-container'>
-                    <button id = 'local-button'>Delete Local</button>
-                </div>
-            </div>
-            <div id = 'made-by'>Made by Ché</div>
         </div>
     </body>
+
 
 </html>

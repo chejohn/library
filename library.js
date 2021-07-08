@@ -1,178 +1,148 @@
 
-function exposePanel() {
-    const infoPanel = document.querySelector('.info-panel');
-    infoPanel.classList.toggle('info-panel-display');
+
+function showPopUpForm() {
+    body.prepend(popUpBackground);
 }
 
-function showFormPopUp() {
-    body.appendChild(formPopUp);
-}
-
-function showEditPopUp() {
-    body.appendChild(editPopUp);
-}
-
-function hideFormPopUp() {
-    formInputs.forEach((input) => {
-        input.value = '';
+// returns false if an input field is blank
+function validateForm() {
+    let blankCounter = 0;
+    let validNumber = true;
+    formTextInputs.forEach((input) => {
+        if (input.value.trim() === "")
+            blankCounter++;
+        if (input.getAttribute("type") === "number") {
+            const inputNum = Number(input.value);
+            if (inputNum < 1 || inputNum > 9999)
+                validNumber = false;
+        }
     });
-    formPopUp.remove();
+    return blankCounter === 0 && validNumber === true;
 }
 
-function hideEditPopUp() {
-    editPopUp.remove();
+function hidePopUpForm() {
+    formTextInputs[0].value = "";
+    formTextInputs[1].value = "";
+    formTextInputs[2].value = "";
+    formCheckBox.checked = false;
+
+    popUpBackground.remove();
 }
 
-function Book(title, author, totalPages, finishedPages) {
+function stopClickEvent(e) {
+    e.stopPropagation();
+}
+
+function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
-    this.totalPages = totalPages;
-    this.finishedPages = finishedPages;
+    this.pages = pages;
+    this.read = read;
 }
 
-function updateDispay(copyBookGUI, book) {
-    const finishedPages = copyBookGUI.childNodes[7].childNodes[1];
-    const totalPages = copyBookGUI.childNodes[7].childNodes[3];
-    const author = copyBookGUI.childNodes[3].childNodes[3];
-    const title = copyBookGUI.childNodes[3].childNodes[1];
-
-    finishedPages.textContent = book.finishedPages;
-    totalPages.textContent = book.totalPages;
-    author.textContent = book.author;
-    title.textContent = book.title;
+Book.prototype.toggleReadStatus = function() {
+    if (this.read === true) this.read = false;
+    else this.read = true;
 }
 
-function displayBook(book) {
-    const copyBookGUI = bookGUI.cloneNode(true);
-    
-    addEventListenersToCopyGUI(copyBookGUI);
-    updateDispay(copyBookGUI, book);
+function createCard(title, author, pages, readStatus) {
+    const copyCardGUI = bookCardGUI.cloneNode(true);
+    copyCardGUI.childNodes[1].innerText = `"${title}"`;
+    copyCardGUI.childNodes[3].innerText = author;
+    copyCardGUI.childNodes[5].innerText = `${pages} pages`;
 
-    copyBookGUI.setAttribute('data-bookindex', latestBook);
-    latestBook++;
+    if (readStatus === false) {
+        copyCardGUI.childNodes[7].setAttribute("id", "not-read-bttn");
+        copyCardGUI.childNodes[7].innerText = "Not read";
+    }
 
-    bookContainer.insertBefore(copyBookGUI, addBook);
-    bookCount++;
-    bookCountGUI.innerText = `${bookCount}`;
+    copyCardGUI.setAttribute("data-id", `${idCounter}`);
+    idCounter++;
 
-    copyGUICollection.push(copyBookGUI);
+    // adds event listener to "remove" button
+    copyCardGUI.childNodes[9].addEventListener('click', removeCard);
+
+    // adds event listener to "read" button
+    copyCardGUI.childNodes[7].addEventListener("click", changeReadStatus);
+
+    cardArray.push(copyCardGUI);
+    return copyCardGUI;
 }
 
-function addEventListenersToCopyGUI(copyBookGUI) {
-    
-    const remove = copyBookGUI.childNodes[1].childNodes[3];
-    remove.addEventListener('click', removeBook);
-
-    const edit = copyBookGUI.childNodes[1].childNodes[1];
-    edit.addEventListener('click', editBook);
-    
-    const check = copyBookGUI.childNodes[5].childNodes[3];
-
-
-    const minus = copyBookGUI.childNodes[5].childNodes[1];
-
-
-    const addPage = copyBookGUI.childNodes[5].childNodes[5];
-}
-
-function addBookToLibrary() {
-    const title = formInputs[0].value;
-    const author = formInputs[1].value;
-    const totalPages = formInputs[2].value;
-    const finishedPages = formInputs[3].value;
-    const book = new Book(title, author, totalPages, finishedPages);
-    myLibrary.push(book);
-    hideFormPopUp();
-    displayBook(book);
-}
-
-function removeBook() {
-    const bookIndex = this.parentElement.parentElement.getAttribute('data-bookindex');
-    myLibrary.splice(bookIndex, 1);
-    this.parentElement.parentElement.remove();
-    latestBook--;
-    copyGUICollection.splice(bookIndex, 1);
-    updateBookIndexes();
-
-    bookCount--;
-    bookCountGUI.innerText = `${bookCount}`;
-}
-
-function updateBookIndexes() {
-    let i = 0;
-    copyGUICollection.forEach((copyBookGUI) => {
-        copyBookGUI.setAttribute('data-bookindex', i)
-        i++;
-    })
-}
-
-function editBook() {
-    showEditPopUp();
-    const bookIndex = this.parentElement.parentElement.getAttribute('data-bookindex');
-    const copyBookGUI = this.parentElement.parentElement;
-    
-    currentBookGUIEdited = copyBookGUI;
-    currentBookIndexEdited = bookIndex;
-    
+function changeReadStatus() {
+    const bookIndex = Number(this.parentNode.getAttribute("data-id"));
     const book = myLibrary[bookIndex];
-    editInputs[0].value = book.title;
-    editInputs[1].value = book.author;
-    editInputs[2].value = book.totalPages;
-    editInputs[3].value = book.finishedPages;
+    book.toggleReadStatus();
+
+    if (book.read === false) {
+        this.setAttribute("id", "not-read-bttn");
+        this.innerText = "Not read";
+    }
+    else {
+        this.setAttribute("id", "read-bttn");
+        this.innerText = "Read";
+    }
 }
 
-function saveEdit() {
-    const copyBookGUI = currentBookGUIEdited;
-    const book = myLibrary[currentBookIndexEdited];
-    book.title = editInputs[0].value;
-    book.author = editInputs[1].value;
-    book.totalPages = editInputs[2].value;
-    book.finishedPages = editInputs[3].value;
-    updateDispay(copyBookGUI, book);
-    hideEditPopUp();
+function removeCard() {
+    const copyCardGUI = this.parentNode;
+    const bookIndex = Number(copyCardGUI.getAttribute("data-id"));
+    myLibrary.splice(bookIndex, 1);
+    idCounter--;
+
+    for (let i = 0; i <= idCounter;i++) {
+        cardArray[i].setAttribute("data-id", `${i}`);
+    }
+    copyCardGUI.remove();
+}
+
+function addBookToLibrary(e) {
+    if (validateForm() === false) return;
+    e.preventDefault();
+
+    const titleForm = formTextInputs[0].value;
+    const authorForm = formTextInputs[1].value;
+    const pagesForm = formTextInputs[2].value;
+    const readStatusForm = formCheckBox.checked;
+
+    const book = new Book(titleForm, authorForm, pagesForm, readStatusForm);
+    myLibrary.push(book);
+    const cardGUI = createCard(titleForm, authorForm, pagesForm, readStatusForm);
+    gridContainer.append(cardGUI);
+    hidePopUpForm();
+}
+
+function checkPageNumber() {
+    this.reportValidity();
 }
 
 const myLibrary = [];
-let latestBook = 0;
-let bookCount = 0;
-let completedBooks = 0;
-const copyGUICollection = [];
-let currentBookIndexEdited = 0;
-let currentBookGUIEdited;
+let idCounter = 0;
+const cardArray = [];
 
-document.getElementById('menu').addEventListener('click', exposePanel);
+const body = document.body;
 
-const cancelForm = document.getElementById('cancel-form');
-cancelForm.addEventListener('click', hideFormPopUp);
+const popUpBackground = document.getElementById('popUp-background');
+popUpBackground.addEventListener('click', hidePopUpForm);
 
-const cancelEdit = document.getElementById('cancel-edit')
-cancelEdit.addEventListener('click', hideEditPopUp);
+const form = document.getElementById("popUp-form");
+form.addEventListener("click", stopClickEvent);
+const formTextInputs = document.querySelectorAll(".text-field");
+const formCheckBox = document.getElementById('checkbox');
 
-const editButton = document.getElementById('edit-form-button');
-editButton.addEventListener('click', saveEdit);
+const submitForm = document.getElementById("form-bttn");
+submitForm.addEventListener('click', addBookToLibrary);
 
-const body = document.querySelector('body');
+const numberInput = document.querySelector("input[type = 'number']");
+numberInput.addEventListener('input', checkPageNumber);
 
-const formInputs = document.querySelectorAll('.input-form');
-const editInputs = document.querySelectorAll('.input-edit');
+popUpBackground.remove();
 
-const addButton = document.getElementById('add');
-addButton.addEventListener('click', addBookToLibrary);
+const newBookBttn = document.getElementById("new-book-bttn");
+newBookBttn.addEventListener("click", showPopUpForm);
 
-const formPopUp = document.getElementById('popUp-background-form');
-formPopUp.remove();
+const bookCardGUI = document.querySelector('.card');
+bookCardGUI.remove();
 
-const editPopUp = document.getElementById('popUp-background-edit');
-editPopUp.remove();
-
-const bookGUI = document.querySelector('.book');
-bookGUI.remove();
-
-const bookContainer = document.getElementById('book-container');
-
-const addBook = document.querySelector('.add-button');
-addBook.addEventListener('click', showFormPopUp);
-
-const bookCountGUI = document.getElementById('count');
-
+const gridContainer = document.getElementById("grid-container");
 
