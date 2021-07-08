@@ -56,8 +56,8 @@ function createCard(title, author, pages, readStatus) {
         copyCardGUI.childNodes[7].innerText = "Not read";
     }
 
-    copyCardGUI.setAttribute("data-id", `${idCounter}`);
     idCounter++;
+    copyCardGUI.setAttribute("data-id", `${idCounter}`);
 
     // adds event listener to "remove" button
     copyCardGUI.childNodes[9].addEventListener('click', removeCard);
@@ -88,9 +88,11 @@ function removeCard() {
     const copyCardGUI = this.parentNode;
     const bookIndex = Number(copyCardGUI.getAttribute("data-id"));
     myLibrary.splice(bookIndex, 1);
+    cardArray.splice(bookIndex, 1);
     idCounter--;
 
     for (let i = 0; i <= idCounter;i++) {
+        console.log(cardArray);
         cardArray[i].setAttribute("data-id", `${i}`);
     }
     copyCardGUI.remove();
@@ -117,7 +119,7 @@ function checkPageNumber() {
 }
 
 const myLibrary = [];
-let idCounter = 0;
+let idCounter = -1;
 const cardArray = [];
 
 const body = document.body;
