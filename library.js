@@ -8,6 +8,16 @@ function showPopUpForm() {
 function validateForm() {
     let blankCounter = 0;
     let validNumber = true;
+    let uniqueEntry = true
+
+    const bookTitle = formTextInputs[0].value.toLowerCase();
+    
+    for (let i = 0; i < myLibrary.length; i++) {
+        if (myLibrary[i].title.toLowerCase() === bookTitle)
+            uniqueEntry = false;
+            break;
+    }
+
     formTextInputs.forEach((input) => {
         if (input.value.trim() === "")
             blankCounter++;
@@ -17,7 +27,8 @@ function validateForm() {
                 validNumber = false;
         }
     });
-    return blankCounter === 0 && validNumber === true;
+    if (uniqueEntry === false) alert("This book already exists in your library.");
+    return blankCounter === 0 && validNumber === true && uniqueEntry === true;
 }
 
 function hidePopUpForm() {
@@ -92,15 +103,14 @@ function removeCard() {
     idCounter--;
 
     for (let i = 0; i <= idCounter;i++) {
-        console.log(cardArray);
         cardArray[i].setAttribute("data-id", `${i}`);
     }
     copyCardGUI.remove();
 }
 
 function addBookToLibrary(e) {
-    if (validateForm() === false) return;
     e.preventDefault();
+    if (validateForm() === false) return;
 
     const titleForm = formTextInputs[0].value;
     const authorForm = formTextInputs[1].value;
