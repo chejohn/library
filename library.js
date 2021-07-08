@@ -13,7 +13,7 @@ function validateForm() {
             blankCounter++;
         if (input.getAttribute("type") === "number") {
             const inputNum = Number(input.value);
-            if (inputNum < 1 || inputNum > 9999)
+            if (inputNum < 1 || inputNum > 9999 || input.value.includes("."))
                 validNumber = false;
         }
     });
