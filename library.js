@@ -44,16 +44,18 @@ function stopClickEvent(e) {
     e.stopPropagation();
 }
 
-function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-}
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
 
-Book.prototype.toggleReadStatus = function() {
-    if (this.read === true) this.read = false;
-    else this.read = true;
+    toggleReadStatus() {
+        if (this.read === true) this.read = false;
+        else this.read = true;
+    }
 }
 
 function createCard(title, author, pages, readStatus) {
